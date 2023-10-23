@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--
+    Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
+        https://cordova.apache.org/docs/en/latest/
+    Some notes:
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; connect-src *; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <title>LCARS LED LIGHTSHOW</title>
+    <link rel="stylesheet" href="css/lcars.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+
+<body>
+    <div class="lcars-app-container">
+        <!-- HEADER ==================================================== -->
+        <div id="header" class="lcars-row header">
+            <!-- ELBOW -->
+            <div class="lcars-elbow left-bottom lcars-golden-tanoi-bg"></div>
+            <!-- BAR WITH TITLE -->
+            <div class="lcars-bar horizontal">
+                <div class="lcars-title right">LED LIGHTSHOW</div>
+            </div>
+            <!-- ROUNDED EDGE DECORATED -->
+            <div class="lcars-bar horizontal right-end decorated"></div>
+        </div>
+        <!-- SIDE MENU ================================================= -->
+        <div id="left-menu" class="lcars-column start-space lcars-u-1" style="text-transform: uppercase;">
+            <a href="#presets">
+                <div class="lcars-element button lcars-chestnut-rose-bg" data-page="presets">Presets</div>
+            </a>
+            <a href="#color_pick">
+                <div class="lcars-element button lcars-hopbush-bg" data-page="color_pick">Color Pick</div>
+            </a>
+            <a href="#music_strobe">
+                <div class="lcars-element button lcars-lilac-bg" data-page="music_strobe">Music Strobe</div>
+            </a>
+            <a href="#config">
+                <div class="lcars-element button lcars-lavender-purple-bg" data-page="config">Config</div>
+            </a>
+            <a href="https://github.com/joernweissenborn/lcars" target="_blank">
+                <div class="lcars-element button lcars-lavender-purple-bg">SRC</div>
+            </a>
+            <!-- FILLER -->
+            <div class="lcars-bar lcars-u-1"></div>
+        </div>
+        <!-- FOOTER ==================================================== -->
+        <div id="footer" class="lcars-row ">
+            <!-- ELBOW -->
+            <div class="lcars-elbow left-top lcars-golden-tanoi-bg"></div>
+            <!-- BAR -->
+            <div class="lcars-bar horizontal both-divider bottom"></div>
+            <!-- ROUNDED EDGE -->
+            <div class="lcars-bar horizontal right-end left-divider bottom"></div>
+        </div>
+        <!-- MAIN CONTAINER -->
+        <div id="container">
+            <!-- COLUMN LAYOUT -->
+            <div class="lcars-column">
+                <!-- PRESETS -->
+                <div id="presets" class="content active">
+                    <div class="resp-grid">
+                        <div class="lcars-element button rounded lcars-lilac-bg" data-route="rainbow">Rainbow</div>
+                        <div class="lcars-element button rounded" data-route="gradualrgb">Gradual RGB</div>
+                        <!-- Hue, Saturation, Brightness Test-->
+                        <div class="lcars-element button rounded lcars-red-alert-bg" data-route="hsbtest">HSB Test</div>
+                        <!-- Hue, Saturation, Lightness Test-->
+                        <div class="lcars-element button rounded lcars-red-alert-bg" data-route="hsltest">HSL Test</div>
+                        <!-- Pixel Animations-->
+                        <div class="lcars-element button rounded lcars-red-alert-bg" data-route="animations">Animations</div>
+                        <!-- All Off -->
+                        <div class="lcars-element button rounded lcars-red-alert-bg" data-route="alloff">Off</div>
+                    </div>
+                </div>
+                <!-- COLOR PICK -->
+                <div id="color_pick" class="content">
+                    <div class="resp-grid">
+                        <div class="lcars-column">
+                        <p>
+                            <!--  Fully inline svg style -->
+                            <!-- Created with Inkscape (http://www.inkscape.org/) -->
+                            <svg width="45mm" height="45mm" version="1.1" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                                <metadata>
+                                    <rdf:RDF>
+                                        <cc:Work rdf:about="">
+                                            <dc:format>image/svg+xml</dc:format>
+                                            <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+                                            <dc:title />
+                                        </cc:Work>
+                                    </rdf:RDF>
+                                </metadata>
+                                <path id="xy_ctl_NE" class="button lcars-husk-bg" d="m47 33v-32.35c15.992 2.4474 29.977 16.417 32.424 32.35z" />
+                                <path id="xy_ctl_SW" class="button lcars-husk-bg" d="m33 47v32.35c-15.992-2.4474-29.977-16.417-32.424-32.35z" />
+                                <path id="xy_ctl_SE" class="button lcars-husk-bg" d="m47 47v32.35c15.992-2.4474 29.977-16.417 32.424-32.35z" />
+                                <path id="xy_ctl_up" class="button lcars-white-bg" d="m34 10h12v-9.5c-3.8785-0.47437-8.044-0.4824-12 0z"/>
+                                <path d="m44.2 2.2v5.0271" style="fill:none;stroke-width:1.2;stroke:#000000" />
+                                <path id="xy_ctl_left" class="button lcars-red-alert-bg" d="m10 46v-12h-9.5c-0.47437 3.8785-0.4824 8.044 0 12z" />
+                                <path d="m2.199 35.8h5.0271" style="fill:none;opacity:.889;stroke-width:1.2;stroke:#000000" />
+                                <path id="xy_ctl_right" class="button lcars-bahama-blue-bg" d="m70 34v12h9.5c0.47437-3.8785 0.4824-8.044 0-12z" />
+                                <path d="m77.801 44.2h-5.0271" style="fill:none;stroke-width:1.2;stroke:#000000" />
+                                <path id="xy_ctl_down" class="button lcars-navy-blue-bg" d="m46 70h-12v9.5c3.8785 0.47437 8.044 0.4824 12 0z" />
+                                <path d="m35.8 77.8v-5.0271" style="fill:none;stroke-width:1.2;stroke:#000000" />
+                                <path d="m11 34v12h23v23h12v-23h23v-12h-23v-23h-12v23z" class="lcars-blue-bell-bg" />
+                                <path d="m34 13.49h12" style="fill:none;stroke-width:.75;stroke:#000000" />
+                                <path d="m34 16.2h12" style="fill:none;stroke-width:.75;stroke:#000000" />
+                                <path d="m34 19.48h12" style="fill:none;stroke-width:.75;stroke:#000000" />
+                                <path d="m34 27.9h12" style="fill:none;stroke-width:.75;stroke:#000000" />
+                                <path d="m34 59h12" style="fill:none;stroke-width:.75;stroke:#000000" />
+                                <path id="xy_ctl_NW" class="button lcars-husk-bg" d="m32.977 33v-32.35c-15.992 2.4474-29.977 16.417-32.424 32.35z" />
+                                <text dy="15%">
+                                    <textPath href="#xy_ctl_NE" startoffset="10%" text-anchor="middle" dominant-baseline="middle" fill="black" font-size="14px">+</textPath>
+                                </text>
+                                <text dy="-15%">
+                                    <textPath href="#xy_ctl_NW" startoffset="90%" text-anchor="middle" dominant-baseline="middle" fill="black" font-size="14px">-</textPath>
+                                </text>
+                            </svg>
+                            <!--  END Fully inline svg style -->
+                        </p>
+                        </div>
+                        <div class="lcars-column">
+                            <form name="rgbfrm" id="rgbfrm">
+                                <div class="lcars-row">
+                					<div class="lcars-element-addition "><span><output class="lcars-slider-output" for="pickerRed" id="pickerColorDispRed">R</output>ED</span>
+                						<input type="range" name="pickerRed" id="pickerRed" min="0" max="255" step="1" value="0" class="lcars-red-alert-color">
+                					</div>
+                                </div>
+                                <div class="lcars-row">
+                					<div class="lcars-element-addition "><span><output class="lcars-slider-output" for="pickerGreen" id="pickerColorDispGreen">G</output>REEN</span>
+                						<input type="range" name="pickerGreen" id="pickerGreen" min="0" max="255" step="1" value="0" class="lcars-bahama-blue-color">
+                					</div>
+                                </div>
+                                <div class="lcars-row">
+                					<div class="lcars-element-addition "><span><output class="lcars-slider-output" for="pickerBlue" id="pickerColorDispBlue">B</output>LUE</span>
+                						<input type="range" name="pickerBlue" id="pickerBlue" min="0" max="255" step="1" value="0" class="lcars-navy-blue-color">
+                					</div>
+                                </div>
+                                <div class="lcars-row">
+                					<div class="lcars-element-addition "><span><output class="lcars-slider-output" for="pickerWhite" id="pickerColorDispWhite">B</output>RIGHTNESS</span>
+                						<input type="range" name="pickerWhite" id="pickerWhite" min="0" max="64" step="1" value="64" class="lcars-white-color">
+                					</div>
+                                </div>
+                                <div class="lcars-row">
+                                    <div id="transmitBtn" class="lcars-element button lcars-lilac-bg rounded" style="width:100%">TRANSMIT</div>
+                                </div>
+                			</form>
+                        </div>
+                    </div>
+                </div>
+                <!-- MUSIC STROBE -->
+                <div id="music_strobe" class="content">
+                    <h2>Music Strobe</h2>
+                </div>
+                <!-- CONFIG -->
+                <div id="config" class="content">
+                    <div class="resp-grid">
+                        <h2>Config</h2>
+                        <form name="configfrm" id="configfrm">
+                            <p>Pi Host IP (req)<input id="hostip" class="lcars-text-input decorated lcars-husk-color"></p>
+                            <p>Pi Host Port<input id="hostport" class="lcars-text-input decorated lcars-husk-color"></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <audio id="audDummy"></audio><!-- Just leave this here, just needed to enable automatic query canplay in the initialization code to load compatible media types -->
+    <script src="js/lcars_audio.js"></script>
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
