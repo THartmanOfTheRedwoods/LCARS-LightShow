@@ -17,19 +17,41 @@ function attachNavigation() {
   }));
 }
 
-function buildUriAndFetch(route) {
+function buildUriAndFetch(route, method="GET", data=null) {  // Later make this a general routing function for GET, POST, PUT and DELETE
     const hostip = document.querySelector("#hostip");
     const hostport = document.querySelector("#hostport");
+    // Make sure we have a host and port configured.
     if( hostip.value === "" ) {
       alert("A host IP is required");
       return;
     }
-    const uri = "http://"+hostip.value + ((hostport.value !== "") ? ":" + hostport.value : "") +"/device/"+route;
+    // Create our REST interface URL
+    const uri = "http://" + hostip.value + ((hostport.value !== "") ? ":" + hostport.value : "") +"/device/"+route;
     console.log("Calling: " + uri);
-    /* Make Get Request */
-    fetch(uri)
-      .then((response) => response.json())
-      .then((json) => console.log(json));
+    // Define our fetch parameters like method and body.
+    fetchOptions = { "method": method };
+    if( data !== null ) {
+      fetchOptions["headers"] = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      };
+      fetchOptions["body"] = JSON.stringify(data);
+    }
+    // Make request
+    fetch(uri, fetchOptions).then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Failed to set color');
+      }
+    }).then(data => {
+      // Handle the response data (Device object) as needed
+      console.log('Response from request:', data);
+    })
+    .catch(error => {
+      // Handle any errors
+      console.error('Error:', error);
+    });
 }
 
 function attachPresetControls() {
@@ -65,7 +87,15 @@ function attachColorPickerControls() {
     const step = parseInt(selectedPicker.getAttribute("step"));
     selectedPicker.value = val - step;
   });
-  document.querySelector("#transmitBtn").addEventListener("click", function() {
+  document.querySelector("#transmitBtn").addEventListener("click", e => {
+    const transmit = e.target;
+    const frm = transmit.closest('form');
+    const data = {
+      red: frm.pickerRed.value,
+      green: frm.pickerGreen.value,
+      blue: frm.pickerBlue.value
+    };
+    buildUriAndFetch(e.target.dataset.route, "POST", data);
   });
 }
 
