@@ -4,10 +4,21 @@ let selectedPicker = null;
 document.addEventListener("deviceready", function(event) {
   //Many browsers won't play this next sound because the user hasn't "blessed" the action with a UI click yet.
   lcarsAudio.Ready();
+  attachConfig();
   attachNavigation();
   attachPresetControls();
   attachColorPickerControls();
 }, false);
+
+function attachConfig() {
+  const configInputs = document.querySelectorAll("#configfrm .lcars-text-input");
+  configInputs.forEach( input => {
+    input.value = window.localStorage.getItem(input.id);
+    input.addEventListener("focusout", e => {
+      window.localStorage.setItem(e.target.id, e.target.value);
+    });
+  });
+}
 
 function attachNavigation() {
   const navbuttons = document.querySelectorAll("#left-menu .button");
