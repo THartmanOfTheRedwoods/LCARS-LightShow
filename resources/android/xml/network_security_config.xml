@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">192.168.20.10:8080</domain>
+        <domain includeSubdomains="true">192.168.20.10:8080/device</domain>
+        <domain includeSubdomains="true">127.0.0.1:8080</domain>
+        <domain includeSubdomains="true">localhost:8080</domain>
+    </domain-config>
+</network-security-config>

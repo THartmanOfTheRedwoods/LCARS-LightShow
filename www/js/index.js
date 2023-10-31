@@ -28,24 +28,30 @@ function attachNavigation() {
   }));
 }
 
-function buildUriAndFetch(route, method="GET", data=null) {  // Later make this a general routing function for GET, POST, PUT and DELETE
-    const hostip = document.querySelector("#hostip");
-    const hostport = document.querySelector("#hostport");
-    // Make sure we have a host and port configured.
-    if( hostip.value === "" ) {
-      alert("A host IP is required");
-      return;
+function getDeviceUrl() {
+    const deviceip = document.querySelector("#deviceip");
+    const deviceport = document.querySelector("#deviceport");
+    // Make sure we have a device host and port configured.
+    if( deviceip.value === "" ) {
+      alert("A Device IP is required");
+      return null;
     }
     // Create our REST interface URL
-    const uri = "http://" + hostip.value + ((hostport.value !== "") ? ":" + hostport.value : "") +"/device/"+route;
-    console.log("Calling: " + uri);
+    const uri = "https://" + deviceip.value + ((deviceport.value !== "") ? ":" + deviceport.value : "") +"/devices/process";
+    console.log("Returning: " + uri);
+    return uri;
+}
+
+function buildUriAndFetch(uri, method="GET", data=null) {  // Later make this a general routing function for GET, POST, PUT and DELETE
+    if(!uri) { return false; }
+
     // Define our fetch parameters like method and body.
     fetchOptions = { "method": method };
-    if( data !== null ) {
-      fetchOptions["headers"] = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      };
+    fetchOptions["headers"] = {
+      'Accept': 'application/json'
+    };
+    if(data !== null) {
+      fetchOptions["headers"]["Content-Type"] = 'application/json';
       fetchOptions["body"] = JSON.stringify(data);
     }
     // Make request
@@ -53,7 +59,7 @@ function buildUriAndFetch(route, method="GET", data=null) {  // Later make this 
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error('Failed to set color');
+        throw new Error('Failed to process request.');
       }
     }).then(data => {
       // Handle the response data (Device object) as needed
@@ -68,7 +74,12 @@ function buildUriAndFetch(route, method="GET", data=null) {  // Later make this 
 function attachPresetControls() {
   const presetbuttons = document.querySelectorAll("#presets .button");
   presetbuttons.forEach(btn => btn.addEventListener("click", e => {
-    buildUriAndFetch(e.target.dataset.route);
+    const data = {
+      "deviceName": document.querySelector("#device").value,
+      "deviceCommand": e.target.dataset.route,
+      "commandParameters": {}
+    };
+    buildUriAndFetch(getDeviceUrl(), "POST", data);
   }));
 }
 
@@ -102,11 +113,15 @@ function attachColorPickerControls() {
     const transmit = e.target;
     const frm = transmit.closest('form');
     const data = {
-      red: frm.pickerRed.value,
-      green: frm.pickerGreen.value,
-      blue: frm.pickerBlue.value
+      "deviceName": document.querySelector("#device").value,
+      "deviceCommand": e.target.dataset.route,
+      "commandParameters": {
+        red: frm.pickerRed.value,
+        green: frm.pickerGreen.value,
+        blue: frm.pickerBlue.value
+      }
     };
-    buildUriAndFetch(e.target.dataset.route, "POST", data);
+    buildUriAndFetch(getDeviceUrl(), "POST", data);
   });
 }
 
